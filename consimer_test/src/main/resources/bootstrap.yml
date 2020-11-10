@@ -1,0 +1,33 @@
+server:
+  port: 50002
+
+spring:
+  application:
+    name: consumer-test
+  cloud:
+    nacos:
+      #配置配置中心
+      config:
+        server-addr: 192.168.32.132:8848
+        file-extension: yaml
+        namespace: public
+      #配置服务发现
+      discovery:
+        server-addr: 192.168.32.132:8848
+        namespace: public
+  sentinel:
+    transport:
+      #sentinel dashboard/console 地址
+      dashboard: localhost:8081
+      # sentinel会在该端⼝启动http server，那么这样的话，控制台定义的⼀些限流等规则才能发送传递过来，
+      port: 50002
+
+#暴露出来健康检查和检测的接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

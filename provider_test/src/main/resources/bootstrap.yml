@@ -1,0 +1,55 @@
+server:
+  port: 50001
+spring:
+  application:
+    name: provider-test
+  cloud:
+    nacos:
+      #配置配置中心
+      config:
+        server-addr: 192.168.32.132:8848
+        file-extension: yaml
+        namespace: public
+      #配置服务发现
+      discovery:
+        server-addr: 192.168.32.132:8848
+        namespace: public
+
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  #dubbo扫描dubbo注解报名
+  scan:
+    base-packages: com.fl.angel
+  protocol:
+    # dubbo 协议
+    name: dubbo
+    # dubbo 协议端⼝（ -1 表示⾃增端⼝，从 20880 开始）
+    port: -1
+  cloud:
+    # 订阅服务提供⽅的应⽤列表，订阅多个服务提供者使⽤ "," 连接
+    subscribed-services: consumer-test
+  registry:
+    #注册到springcloud服务
+    address: spring-cloud://192.168.32.132:8848
+
+  sentinel:
+    transport:
+      #sentinel dashboard/console 地址
+      dashboard: localhost:8081
+      # sentinel会在该端⼝启动http server，那么这样的话，控制台定义的⼀些限流等规则才能发送传递过来，
+      port: 8082
+
+feign:
+  sentinel:
+    enabled: true
+
+#暴露出来健康检查和检测的接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
