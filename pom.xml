@@ -54,12 +54,12 @@
     </dependencies>
 
     <repositories>
-        <!--指定阿里云镜像库下载依赖-->
+<!--        &lt;!&ndash;指定阿里云镜像库下载依赖&ndash;&gt;
         <repository>
             <id>central</id>
             <name>aliyunmaven</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
+        </repository>-->
     </repositories>
 
 
