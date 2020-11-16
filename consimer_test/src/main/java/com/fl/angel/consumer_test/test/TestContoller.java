@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 @RefreshScope
+@CrossOrigin
 public class TestContoller {
 
     @Autowired
@@ -52,6 +55,16 @@ public class TestContoller {
         String result = restTemplate.getForObject("http://provider-test/provider", String.class);
         log.info("---------restTemplate消费者结束--------result{}----", result);
         return result;
+    }
+
+
+    //restTemplate调用测试
+    @RequestMapping("/login")
+    public String Login(String username,String password) {
+
+        System.out.println(username);
+        System.out.println(password);
+        return "200";
     }
 
 

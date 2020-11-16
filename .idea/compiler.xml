@@ -6,10 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
-        <module name="provider_test" />
-        <module name="base" />
         <module name="consimer_test" />
+        <module name="common" />
+        <module name="gateway" />
+        <module name="base" />
+        <module name="provider_test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

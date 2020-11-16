@@ -13,6 +13,7 @@
         <module>consimer_test</module>
         <module>common</module>
         <module>base</module>
+        <module>gateway</module>
     </modules>
 
 
@@ -54,12 +55,12 @@
     </dependencies>
 
     <repositories>
-<!--        &lt;!&ndash;指定阿里云镜像库下载依赖&ndash;&gt;
+        <!--指定阿里云镜像库下载依赖-->
         <repository>
             <id>central</id>
             <name>aliyunmaven</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>-->
+        </repository>
     </repositories>
 
 
