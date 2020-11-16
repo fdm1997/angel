@@ -1,53 +1,53 @@
 server:
-  port: 50000
+  port: 50003
+
 ##gateWay注册到到nacos上的服务应用名称
 spring:
   application:
-    name: angel-gateway
+    name: gateway
   cloud:
     nacos:
+      #配置配置中心
+      config:
+        server-addr: 115.159.151.88:8848
+        file-extension: yamls
+        namespace: 42a6cdaa-f1aa-4a1f-9090-edfca0a9e515
       discovery:
         #gateway工程注册到nacos上的地址
-        server-addr: 192.168.32.132:8848
-        namespace: public
-    gateway:
-      discovery:
-        locator:
-          #开启gateway从nacos上获取服务列表
-          enabled: false
-  profiles:
-    active: dev  # 具体的gateway配置
-#开启acutor端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      #打开端点详情
-      show-details: always
-
+        server-addr: 115.159.151.88:8848
+        namespace: 42a6cdaa-f1aa-4a1f-9090-edfca0a9e515
     gateway:
       # 设置与服务注册发现组件结合，这样可以采用服务名的路由策略
       discovery:
         locator:
           enabled: true
         # 配置路由规则
-      routes:
-        # 采用自定义路由 ID 没什么要求 建议服务名加下标
-        - id: name: consumer-test-01
-          # 采用 LoadBalanceClient 方式请求，以 lb:// 开头，后面的是注册在 Nacos 上的服务名 lb：默认开启负载算法
-          uri: lb://name: consumer-test
-          #路由优先级
-          orser: 1
-          # “断言”，主要作用是匹配用户的请求，有很多种用法
-          predicates:
-            # Method 方法谓词，这里是匹配 GET 请求
-            #- Method=GET
-            # 请求必须以 study-consumer 打头才会走这个路由
-            - Path=/name: consumer-test-service/**
-          # 过滤器
-          filters:
-            #路径转发时向上去除一级
-            - StripPrefix=1
+        routes:
+          # 采用自定义路由 ID 没什么要求 建议服务名加下标
+          - id: consumer-test-01
+            # 采用 LoadBalanceClient 方式请求，以 lb:// 开头，后面的是注册在 Nacos 上的服务名 lb：默认开启负载算法
+            uri: lb://consumer-test
+            #路由优先级
+            orser: 1
+            # “断言”，主要作用是匹配用户的请求，有很多种用法
+            predicates:
+              # Method 方法谓词，这里是匹配 GET 请求
+              #- Method=GET
+              # 请求必须以 study-consumer 打头才会走这个路由
+              - Path=/consumer-test-service/**
+            # 过滤器
+            filters:
+              #路径转发时向上去除一级
+              - StripPrefix=1
+#  profiles:
+#    active: dev  # 具体的gateway配置
+#开启acutor端点
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      #打开端点详情
+#      show-details: always
